@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cachipun</title>
+  </head>
+  <body>
+    <script>
+      // "function JugarRonda" es la funcion que sirve para saber quien es el ganador, perdedor o si es un empate en el juego cachipun.
+
+      // Se define la funcion " JugarRonda ", esta contiene a su vez playerSelection y computerSelection.
+      // PlayerSelection representa el valor ingresado por el usuario.
+      // ComputerSelection representa el valor ingresado por la computadora.
+
+      function JugarRonda(playerSelection, computerSelection) {
+        // ( if ) define la funcion a ejecutar en primera instancia
+        // la funcion define las posibilidades en donde el playerSelection (jugador) gana.
+        if (
+          (playerSelection === "papel" && computerSelection === "piedra") ||
+          (playerSelection === "piedra" && computerSelection === "tijera") ||
+          (playerSelection === "tijera" && computerSelection === "papel")
+        ) {
+          // si cualquiera de las condiciones anteriores se cumple, se retornaria un mensaje ( return ) "el jugador gano"
+
+          return `el jugador gano 🤩! ${playerSelection} Vence a ${computerSelection}`;
+        }
+
+        // si ninguna de las condiciones anteriores se cumple, se ejecuta el contenido de la siguiente condicion declarada ( else if ).
+        // la funcion define las posibilidades en donde el computerSelection (computadora) gana.
+        else if (
+          (playerSelection === "piedra" && computerSelection === "papel") ||
+          (playerSelection === "tijera" && computerSelection === "piedra") ||
+          (playerSelection === "papel" && computerSelection === "tijera")
+        ) {
+          // si cualquiera de las condiciones anteriores se cumple, se retornaria un mensaje ( return ) "el computador gano"
+
+          return `El Computador gano 👾!  ${computerSelection} Vence a ${playerSelection}`;
+        }
+
+        // si ninguna de las condiciones declaradas en " if " y en " else if " se cumplen se ejecutara el mensaje ( return ) "es un empate"
+        else {
+          return "Es un empate 😬";
+        }
+      }
+
+      // Se define la funcion " function choice ".
+      // y dentro de esta se declara la funcion "prompt" que le indica al jugador (playerSelection) que tiene que escojer la opcion para comenzar ("Que opcion eliges? piedra, papel o tijera?")
+
+      function choice() {
+        playerSelection = prompt("Que opcion eliges? piedra, papel o tijera?");
+        playerSelection = playerSelection.toLowerCase();
+        // el computador escoje una de las opciones a travez del "computerPlay"
+        computerSelection = computerPlay();
+        console.log(`El computador eligio: ${computerSelection}`);
+        console.log(`Tu elegiste: ${playerSelection}`);
+      }
+      // Se define la funcion " function computerPlay ".
+      // y dentro de esta se declara la funcion "const options" ("piedra, papel o tijera?").
+      // al ejecutarse retorna (return options) la funcion "Math.random" que nos arroja un resultado random.
+
+      function computerPlay() {
+        const options = ["tijera", "piedra", "papel"];
+        return options[Math.floor(Math.random() * options.length)];
+      }
+      // Se declaran las variables let playerSelection y let computerSelection
+      let playerSelection;
+      let computerSelection;
+      // Se define la variable "let seguir" esta declara la funcion "prompt" que indica la cantidad de veces que el jugador quiere jugar ("ingrese cantidad de veces")
+      // "for" indica el siclo del valor que ingrese el usuario
+      // se ejecuta la funcion "choice" definida con anterioridad.
+      // se muestra quien es el ganador de la ronda (jugador, computador o si es empate)
+      //"if" si esta es la ultima jugada ejecuta la funcion "prompt" ("Desea seguir? ingrese 'si' o 'no'")
+      // para salir del ciclo se agrega la instruccion "break"
+      let seguir;
+      cantidad = prompt("ingrese cantidad de veces");
+      for (let i = 0; i < cantidad; i++) {
+        choice();
+        console.log(JugarRonda(playerSelection, computerSelection));
+        if (i + 1 == cantidad) {
+          seguir = prompt("Desea seguir? ingrese 'si' o 'no'");
+          if (seguir.toLowerCase() === "si") {
+            i = -1;
+            cantidad = prompt("ingrese cantidad de veces");
+          } else {
+            break;
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
